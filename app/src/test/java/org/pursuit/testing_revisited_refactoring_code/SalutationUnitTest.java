@@ -72,27 +72,85 @@ public class SalutationUnitTest {
     }
 
     @Test
-    public void check_professional_prefix() {
-        ProfessionalDesignationEnum profession = "Ron" ,"Burgundy";
-        String expected = "Burgundy";
+    public void check_professional_prefix_for_Dr() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.MEDICAL_DOCTOR;
+        String expected = "Dr.";
 
-        String lastName = salutation.lastName(fullName);
-        Assert.assertEquals(expected, lastName);
+        String prefix = salutation.professionalPrefix(profession);
+        Assert.assertEquals(expected, prefix);
     }
 
-//    @Test
-//    public void check_first_name_for_null_values() {
-//        String[] splitName = new String[]{null, "Burgundy"};
-//        String firstName = splitName[0];
-//        Assert.assertNotNull(salutation.firstName(splitName));
-//    }
-//
-//    @Test (expected = ArrayIndexOutOfBoundsException.class)
-//    public void check_last_name_for_null_values() {
-//        String[] splitName = new String[]{"Ron", null};
-//        String lastName = splitName[splitName.length - 1];
-//        Assert.assertNotNull(salutation.lastName(splitName), lastName);
-//    }
+    @Test
+    public void check_professional_prefix_for_Honorable() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.JUDGE;
+        String expected = "Honorable";
+
+        String prefix = salutation.professionalPrefix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_professional_prefix_for_Null_prefix() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.CERTIFIED_PUBLIC_ACCOUNTANT;
+        String expected = null;
+
+        String prefix = salutation.professionalPrefix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_professional_prefix_for_Null_value() {
+        ProfessionalDesignationEnum profession = null;
+        String expected = "";
+
+        String prefix = salutation.professionalPrefix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_professional_suffix_for_MD() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.MEDICAL_DOCTOR;
+        String expected = "MD";
+
+        String prefix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_professional_suffix_for_PhD() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.ACADEMIC_PROFESSONAL;
+        String expected = "PhD";
+
+        String prefix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_professional_suffix_for_Null_value() {
+        ProfessionalDesignationEnum profession = null;
+        String expected = "";
+
+        String prefix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_has_prefix() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.ACADEMIC_PROFESSONAL;
+        boolean expected = true;
+
+        boolean prefix = salutation.hasPrefix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
+
+    @Test
+    public void check_has_prefix_with_null_value() {
+        ProfessionalDesignationEnum profession = null;
+        boolean expected = false;
+
+        boolean prefix = salutation.hasPrefix(profession);
+        Assert.assertEquals(expected, prefix);
+    }
 
     @After
     public void tearDown() throws Exception {

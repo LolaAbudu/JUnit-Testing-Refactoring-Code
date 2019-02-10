@@ -53,7 +53,7 @@ public class Salutation implements SalutationInterface {
                 temp = i;
             }
         }
-        last = name.substring(temp+1);
+        last = name.substring(temp + 1);
 
         return new String[]{first, last};
 
@@ -86,9 +86,9 @@ public class Salutation implements SalutationInterface {
     public String firstName(String[] nameArray) {
         String first = null;
         int temp = 0;
-        if(nameArray != null){
+        if (nameArray != null) {
             first = nameArray[0];
-        }else{
+        } else {
             return "";
         }
 
@@ -104,7 +104,7 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String lastName(String[] nameArray) {
-        return nameArray[nameArray.length-1];
+        return nameArray[nameArray.length - 1];
     }
 
     /**
@@ -116,6 +116,10 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String professionalPrefix(ProfessionalDesignationEnum profession) {
+        if (profession == null) {
+            return "";
+        }
+
         String prefix = null;
         switch (profession) {
             case MEDICAL_DOCTOR:
@@ -130,8 +134,11 @@ public class Salutation implements SalutationInterface {
             case VETERNARIAN:
                 prefix = "Dr.";
                 break;
-            default:
+            case JUDGE:
                 prefix = "Honorable";
+                break;
+            default:
+                prefix = null;
         }
 
         return prefix;
@@ -146,6 +153,10 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String professionalSuffix(ProfessionalDesignationEnum profession) {
+        if (profession == null) {
+            return "";
+        }
+
         String suffix = null;
         switch (profession) {
             case MEDICAL_DOCTOR:
@@ -165,6 +176,8 @@ public class Salutation implements SalutationInterface {
             case VETERNARIAN:
                 suffix = "DVM";
                 break;
+            default:
+                suffix = null;
         }
 
         return suffix;
@@ -179,7 +192,10 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public boolean hasPrefix(ProfessionalDesignationEnum profession) {
-        return professionalPrefix(profession) != null ? professionalPrefix(profession).equals("") : null;
+        if(profession == null){
+            return false;
+        }
+        return professionalPrefix(profession) != null ? true : false;
     }
 
     /**
