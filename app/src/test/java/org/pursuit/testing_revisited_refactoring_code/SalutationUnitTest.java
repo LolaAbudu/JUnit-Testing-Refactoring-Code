@@ -4,11 +4,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.pursuit.testing_revisited_refactoring_code.salutation.ProfessionalDesignationEnum;
 import org.pursuit.testing_revisited_refactoring_code.salutation.Salutation;
 
 public class SalutationUnitTest {
 
     private Salutation salutation;
+    //private ProfessionalDesignationEnum profession;
 
     @Before
     public void setUp() throws Exception {
@@ -51,19 +53,46 @@ public class SalutationUnitTest {
         Assert.assertNotNull(firstLastName[firstLastName.length - 1]);
     }
 
-    @Test (expected = ArrayIndexOutOfBoundsException.class)
-    public void check_first_name_for_null_values() {
-        String[] splitName = new String[]{null, "Burgundy"};
-        String firstName = splitName[0];
-        Assert.assertNotNull(salutation.firstName(splitName), firstName);
+    @Test
+    public void check_first_name() {
+        String[] fullName = {"Ron" ,"Burgundy"};
+        String expected = "Ron";
+
+        String firstName = salutation.firstName(fullName);
+        Assert.assertEquals(expected, firstName);
     }
 
-    @Test (expected = ArrayIndexOutOfBoundsException.class)
-    public void check_last_name_for_null_values() {
-        String[] splitName = new String[]{"Ron", null};
-        String lastName = splitName[splitName.length - 1];
-        Assert.assertNotNull(salutation.lastName(splitName), lastName);
+    @Test
+    public void check_last_name() {
+        String[] fullName = {"Ron" ,"Burgundy"};
+        String expected = "Burgundy";
+
+        String lastName = salutation.lastName(fullName);
+        Assert.assertEquals(expected, lastName);
     }
+
+    @Test
+    public void check_professional_prefix() {
+        ProfessionalDesignationEnum profession = "Ron" ,"Burgundy";
+        String expected = "Burgundy";
+
+        String lastName = salutation.lastName(fullName);
+        Assert.assertEquals(expected, lastName);
+    }
+
+//    @Test
+//    public void check_first_name_for_null_values() {
+//        String[] splitName = new String[]{null, "Burgundy"};
+//        String firstName = splitName[0];
+//        Assert.assertNotNull(salutation.firstName(splitName));
+//    }
+//
+//    @Test (expected = ArrayIndexOutOfBoundsException.class)
+//    public void check_last_name_for_null_values() {
+//        String[] splitName = new String[]{"Ron", null};
+//        String lastName = splitName[splitName.length - 1];
+//        Assert.assertNotNull(salutation.lastName(splitName), lastName);
+//    }
 
     @After
     public void tearDown() throws Exception {
