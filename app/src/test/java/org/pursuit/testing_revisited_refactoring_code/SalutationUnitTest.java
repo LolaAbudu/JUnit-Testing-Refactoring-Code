@@ -112,8 +112,8 @@ public class SalutationUnitTest {
         ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.MEDICAL_DOCTOR;
         String expected = "MD";
 
-        String prefix = salutation.professionalSuffix(profession);
-        Assert.assertEquals(expected, prefix);
+        String suffix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, suffix);
     }
 
     @Test
@@ -121,8 +121,8 @@ public class SalutationUnitTest {
         ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.ACADEMIC_PROFESSONAL;
         String expected = "PhD";
 
-        String prefix = salutation.professionalSuffix(profession);
-        Assert.assertEquals(expected, prefix);
+        String suffix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, suffix);
     }
 
     @Test
@@ -130,8 +130,8 @@ public class SalutationUnitTest {
         ProfessionalDesignationEnum profession = null;
         String expected = "";
 
-        String prefix = salutation.professionalSuffix(profession);
-        Assert.assertEquals(expected, prefix);
+        String suffix = salutation.professionalSuffix(profession);
+        Assert.assertEquals(expected, suffix);
     }
 
     @Test
@@ -139,8 +139,8 @@ public class SalutationUnitTest {
         ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.ACADEMIC_PROFESSONAL;
         boolean expected = true;
 
-        boolean prefix = salutation.hasPrefix(profession);
-        Assert.assertEquals(expected, prefix);
+        boolean hasPrefix = salutation.hasPrefix(profession);
+        Assert.assertEquals(expected, hasPrefix);
     }
 
     @Test
@@ -148,9 +148,24 @@ public class SalutationUnitTest {
         ProfessionalDesignationEnum profession = null;
         boolean expected = false;
 
-        boolean prefix = salutation.hasPrefix(profession);
-        Assert.assertEquals(expected, prefix);
+        boolean hasPrefix = salutation.hasPrefix(profession);
+        Assert.assertEquals(expected, hasPrefix);
     }
+
+    @Test
+    public void check_professional_name() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.DENTIST;
+        String prefix = salutation.professionalPrefix(profession);
+        String[] splitName = salutation.splitName("Ron Burgundy");
+        String suffix = salutation.professionalSuffix(profession);
+
+        String expected = ("Dr. Ron Burgundy, DDS.");
+        String actual = salutation.professionalName(prefix,splitName,suffix,profession);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    //String prefix, String[] splitName, String suffix, ProfessionalDesignationEnum profession
 
     @After
     public void tearDown() throws Exception {

@@ -210,7 +210,7 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String professionalName(String prefix, String[] splitName, String suffix, ProfessionalDesignationEnum profession) {
-        return null;
+       return  prefix +" "+ splitName[0] +" "+ splitName[1] + ", " + suffix + ".";
     }
 
     /**
