@@ -192,7 +192,7 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public boolean hasPrefix(ProfessionalDesignationEnum profession) {
-        if(profession == null){
+        if (profession == null) {
             return false;
         }
         return professionalPrefix(profession) != null ? true : false;
@@ -210,7 +210,7 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String professionalName(String prefix, String[] splitName, String suffix, ProfessionalDesignationEnum profession) {
-       return  prefix +" "+ splitName[0] +" "+ splitName[1] + ", " + suffix + ".";
+        return prefix + " " + splitName[0] + " " + splitName[1] + ", " + suffix + ".";
     }
 
     /**
@@ -222,8 +222,29 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public int yearsOfEducation(ProfessionalDesignationEnum profession) {
-        return 0;
+        if(profession == null){
+            return 0;
+        }
+        int years = 0;
+        switch (profession) {
+            case MEDICAL_DOCTOR:
+            case DENTIST:
+            case VETERNARIAN:
+                years = 5;
+                break;
+            case LAWYER:
+            case JUDGE:
+                years = 3;
+                break;
+            case ACADEMIC_PROFESSONAL:
+            case CERTIFIED_PUBLIC_ACCOUNTANT:
+                years = 2;
+                break;
+            default:
+        }
+        return years;
     }
+
 
     /**
      * This method returns a String value for a mini-biography of a professional, i.e. - "Dr. Amy Martinez, DDS. went to school for an additional 5 years to join their profession."

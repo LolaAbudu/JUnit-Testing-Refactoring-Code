@@ -165,7 +165,24 @@ public class SalutationUnitTest {
         Assert.assertEquals(expected, actual);
     }
 
-    //String prefix, String[] splitName, String suffix, ProfessionalDesignationEnum profession
+    @Test
+    public void check_years_of_education() {
+        ProfessionalDesignationEnum profession = ProfessionalDesignationEnum.DENTIST;
+        int expected = 5;
+        int actual = salutation.yearsOfEducation(profession);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void check_years_of_education_with_Null_value() {
+        ProfessionalDesignationEnum profession = null;
+        int expected = 0;
+        int actual = salutation.yearsOfEducation(profession);
+
+        Assert.assertEquals(expected, actual);
+    }
+
 
     @After
     public void tearDown() throws Exception {
