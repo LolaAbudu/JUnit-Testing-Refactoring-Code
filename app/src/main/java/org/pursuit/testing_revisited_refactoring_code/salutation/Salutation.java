@@ -260,6 +260,10 @@ public class Salutation implements SalutationInterface {
 
     @Override
     public String careerBio(String[] splitName, String prefix, String suffix, ProfessionalDesignationEnum profession, int educationYears, boolean hasPrefix) {
-        return null;
+        if(splitName == null && prefix == null && suffix == null && profession == null && educationYears == 0 && hasPrefix == false){
+            return "";
+        }
+        String miniBio = prefix + " " + splitName[0] + " " + splitName[1] + ", " + suffix + ". went to school for an additional " + educationYears + " years to join their profession.";
+        return miniBio;
     }
 }
